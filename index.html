@@ -34,7 +34,7 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #1a0a1e 0%, #1a0f1a 15%, #0d1117 30%, #0a0f0d 50%, #1a0a1e 70%, #0d0a0f 100%);
+            background: radial-gradient(ellipse at 50% 0%, #1f1030 0%, #0d0a15 50%, #0a0f0d 100%);
             background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
@@ -42,7 +42,7 @@
             position: relative;
         }
 
-        /* Estrellas de fondo */
+        /* Estrellas de fondo optimizadas */
         .stars-container {
             position: fixed;
             top: 0;
@@ -58,22 +58,23 @@
             border-radius: 50%;
             animation: twinkle var(--duration) ease-in-out infinite;
             animation-delay: var(--delay);
-            opacity: 0;
+            opacity: 0.3;
+            will-change: opacity, transform;
         }
         @keyframes twinkle {
             0%,
             100% {
-                opacity: 0.2;
+                opacity: 0.3;
                 transform: scale(1);
             }
             50% {
-                opacity: 1;
-                transform: scale(1.8);
-                box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.6);
+                opacity: 0.9;
+                transform: scale(1.6);
+                box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
             }
         }
 
-        /* Notas musicales flotantes */
+        /* Notas musicales flotantes optimizadas */
         .floating-notes {
             position: fixed;
             top: 0;
@@ -85,26 +86,27 @@
         }
         .floating-note {
             position: absolute;
-            font-size: 1.5rem;
-            animation: floatUp var(--float-duration) linear infinite;
+            font-size: 1.4rem;
+            animation: floatUp var(--float-duration) linear forwards;
             animation-delay: var(--float-delay);
             opacity: 0;
             color: var(--note-color);
-            text-shadow: 0 0 12px var(--note-color);
+            text-shadow: 0 0 10px var(--note-color);
+            will-change: transform, opacity;
         }
         @keyframes floatUp {
             0% {
-                transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.5);
+                transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.4);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.8;
+            15% {
+                opacity: 0.9;
             }
-            80% {
+            70% {
                 opacity: 0.6;
             }
             100% {
-                transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(1.3);
+                transform: translateY(-15vh) translateX(var(--drift)) rotate(180deg) scale(1.1);
                 opacity: 0;
             }
         }
@@ -126,42 +128,32 @@
             position: relative;
         }
         .hero-content {
-            background: rgba(26, 10, 30, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(20, 8, 25, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 30px;
             padding: 3rem 2.5rem;
-            border: 2px solid rgba(176, 106, 179, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-                0 0 80px rgba(123, 45, 142, 0.2),
-                inset 0 0 40px rgba(176, 106, 179, 0.05);
+            border: 2px solid rgba(176, 106, 179, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             max-width: 700px;
             width: 100%;
-            animation: fadeInUp 1.2s ease-out;
+            animation: fadeInUp 1s ease-out;
             position: relative;
             overflow: hidden;
         }
+        /* Eliminamos el borde animado pesado y lo reemplazamos con un sutil degradado estático */
         .hero-content::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg,
-                    transparent,
-                    rgba(176, 106, 179, 0.08),
-                    transparent,
-                    rgba(11, 79, 55, 0.08),
-                    transparent,
-                    rgba(160, 64, 80, 0.08),
-                    transparent);
-            animation: rotateBorder 12s linear infinite;
-        }
-        @keyframes rotateBorder {
-            to {
-                transform: rotate(360deg);
-            }
+            inset: -2px;
+            border-radius: 32px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(176, 106, 179, 0.4), rgba(11, 79, 55, 0.4), rgba(160, 64, 80, 0.4));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
         .hero-inner {
             position: relative;
@@ -171,7 +163,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -198,12 +190,13 @@
         }
         .heart-beat {
             display: inline-block;
-            animation: heartBeat 1s ease-in-out infinite;
+            animation: heartBeat 1.2s ease-in-out infinite;
             font-size: 3rem;
             color: #e8536c;
             cursor: pointer;
             transition: transform 0.2s;
-            text-shadow: 0 0 30px rgba(232, 83, 108, 0.7);
+            text-shadow: 0 0 25px rgba(232, 83, 108, 0.6);
+            will-change: transform;
         }
         .heart-beat:hover {
             transform: scale(1.3);
@@ -214,13 +207,13 @@
                 transform: scale(1);
             }
             15% {
-                transform: scale(1.35);
+                transform: scale(1.3);
             }
             30% {
                 transform: scale(1);
             }
             45% {
-                transform: scale(1.25);
+                transform: scale(1.2);
             }
             60% {
                 transform: scale(1);
@@ -234,8 +227,8 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(2.5);
-                opacity: 0.5;
+                transform: scale(2.2);
+                opacity: 0.6;
             }
             100% {
                 transform: scale(1);
@@ -256,7 +249,7 @@
             height: 80px;
             border-radius: 0 0 8px 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: transform 0.08s ease;
             position: relative;
             border: 2px solid #3a2a3f;
             font-size: 0.6rem;
@@ -267,7 +260,8 @@
             color: transparent;
             font-weight: 700;
             user-select: none;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            will-change: transform;
         }
         .piano-key.white {
             background: linear-gradient(180deg, #f5f0f5 0%, #d8d0da 40%, #c0b8c2 100%);
@@ -288,35 +282,30 @@
         }
         .piano-key:active,
         .piano-key.pressed {
-            transform: translateY(6px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
-            transition: all 0.05s ease;
-        }
-        .piano-key.white:active,
-        .piano-key.white.pressed {
-            background: linear-gradient(180deg, #e8d8f0 0%, #c8b8cf 100%);
-        }
-        .piano-key.black:active,
-        .piano-key.black.pressed {
-            background: linear-gradient(180deg, #3a1a3f 0%, #1a0a1e 100%);
+            transform: translateY(5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.04s ease;
         }
 
         /* Secciones */
         .section-card {
-            background: rgba(26, 10, 30, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(20, 8, 25, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 24px;
             padding: 2.5rem 2rem;
-            border: 1.5px solid rgba(176, 106, 179, 0.25);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(176, 106, 179, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             margin-bottom: 2rem;
-            transition: all 0.4s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
             cursor: default;
+            will-change: transform;
+            content-visibility: auto;
+            contain-intrinsic-size: 500px;
         }
         .section-card:hover {
-            border-color: rgba(176, 106, 179, 0.5);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(123, 45, 142, 0.15);
+            border-color: rgba(176, 106, 179, 0.45);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(123, 45, 142, 0.1);
             transform: translateY(-3px);
         }
         .section-card.clickable {
@@ -324,7 +313,7 @@
         }
         .section-card.clickable:active {
             transform: scale(0.97);
-            transition: transform 0.15s ease;
+            transition: transform 0.1s ease;
         }
 
         .section-title {
@@ -344,7 +333,7 @@
         /* Mensajes ocultos */
         .hidden-message {
             display: none;
-            animation: revealMessage 0.6s ease-out;
+            animation: revealMessage 0.5s ease-out;
             padding: 1.2rem;
             border-radius: 16px;
             margin-top: 1rem;
@@ -359,7 +348,7 @@
         @keyframes revealMessage {
             from {
                 opacity: 0;
-                transform: translateY(20px) scale(0.9);
+                transform: translateY(15px) scale(0.95);
             }
             to {
                 opacity: 1;
@@ -367,23 +356,23 @@
             }
         }
         .msg-morado {
-            background: rgba(123, 45, 142, 0.2);
-            border: 1px solid rgba(176, 106, 179, 0.4);
+            background: rgba(123, 45, 142, 0.15);
+            border: 1px solid rgba(176, 106, 179, 0.35);
             color: #e8d0f0;
         }
         .msg-vinotinto {
-            background: rgba(107, 29, 47, 0.2);
-            border: 1px solid rgba(160, 64, 80, 0.4);
+            background: rgba(107, 29, 47, 0.15);
+            border: 1px solid rgba(160, 64, 80, 0.35);
             color: #f0d0d8;
         }
         .msg-verde {
-            background: rgba(11, 79, 55, 0.2);
-            border: 1px solid rgba(26, 122, 84, 0.4);
+            background: rgba(11, 79, 55, 0.15);
+            border: 1px solid rgba(26, 122, 84, 0.35);
             color: #c8e8d8;
         }
         .msg-dorado {
-            background: rgba(201, 169, 110, 0.12);
-            border: 1px solid rgba(201, 169, 110, 0.35);
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid rgba(201, 169, 110, 0.3);
             color: #f0e4cc;
         }
 
@@ -393,7 +382,7 @@
             padding: 0.75rem 2rem;
             font-weight: 600;
             letter-spacing: 1px;
-            transition: all 0.35s ease;
+            transition: all 0.3s ease;
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
@@ -407,7 +396,7 @@
         .btn-morado:hover {
             background: var(--morado-oscuro);
             border-color: var(--morado-claro);
-            box-shadow: 0 8px 25px rgba(123, 45, 142, 0.5);
+            box-shadow: 0 8px 20px rgba(123, 45, 142, 0.4);
             transform: translateY(-2px);
             color: white;
         }
@@ -419,7 +408,7 @@
         .btn-vinotinto:hover {
             background: #4d1522;
             border-color: var(--vinotinto-claro);
-            box-shadow: 0 8px 25px rgba(107, 29, 47, 0.5);
+            box-shadow: 0 8px 20px rgba(107, 29, 47, 0.4);
             transform: translateY(-2px);
             color: white;
         }
@@ -431,7 +420,7 @@
         .btn-verde:hover {
             background: #073a27;
             border-color: var(--verde-botella-claro);
-            box-shadow: 0 8px 25px rgba(11, 79, 55, 0.5);
+            box-shadow: 0 8px 20px rgba(11, 79, 55, 0.4);
             transform: translateY(-2px);
             color: white;
         }
@@ -441,10 +430,10 @@
             border-color: var(--dorado);
         }
         .btn-outline-dorado:hover {
-            background: rgba(201, 169, 110, 0.15);
+            background: rgba(201, 169, 110, 0.12);
             border-color: var(--dorado);
             color: #f0e4cc;
-            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+            box-shadow: 0 8px 20px rgba(201, 169, 110, 0.25);
             transform: translateY(-2px);
         }
 
@@ -454,20 +443,22 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-120px);
-            background: rgba(26, 10, 30, 0.9);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(176, 106, 179, 0.6);
+            background: rgba(20, 8, 25, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(176, 106, 179, 0.5);
             border-radius: 50px;
             padding: 0.9rem 2rem;
             z-index: 1000;
             color: #e8d0f0;
             font-weight: 600;
             letter-spacing: 1px;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(123, 45, 142, 0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             font-family: 'Quicksand', sans-serif;
             text-align: center;
             font-size: 1rem;
+            will-change: transform;
         }
         .love-toast.show {
             transform: translateX(-50%) translateY(0);
@@ -481,25 +472,26 @@
             animation: confettiFall var(--fall-duration) ease-in forwards;
             font-size: var(--heart-size);
             opacity: 0.9;
+            will-change: transform, opacity;
         }
         @keyframes confettiFall {
             0% {
-                transform: translateY(-10vh) rotate(0deg) scale(1);
+                transform: translateY(-8vh) rotate(0deg) scale(1);
                 opacity: 1;
             }
-            70% {
-                opacity: 0.7;
+            80% {
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(105vh) rotate(var(--spin)) scale(0.3);
+                transform: translateY(105vh) rotate(var(--spin)) scale(0.25);
                 opacity: 0;
             }
         }
 
         /* Versículo */
         .verse-card {
-            background: rgba(201, 169, 110, 0.08);
-            border: 1.5px solid rgba(201, 169, 110, 0.3);
+            background: rgba(201, 169, 110, 0.06);
+            border: 1.5px solid rgba(201, 169, 110, 0.25);
             border-radius: 20px;
             padding: 2rem;
             text-align: center;
@@ -509,11 +501,11 @@
         .verse-card::before {
             content: '✝';
             position: absolute;
-            top: -20px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2rem;
-            background: #1a0a1e;
+            font-size: 1.8rem;
+            background: #0d0a15;
             padding: 0 15px;
             color: var(--dorado);
         }
@@ -551,6 +543,8 @@
             .hero-content {
                 padding: 2rem 1.2rem;
                 border-radius: 22px;
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
             }
             .piano-key.white {
                 width: 30px;
@@ -566,6 +560,8 @@
             }
             .section-card {
                 padding: 1.5rem 1rem;
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
             }
             .section-title {
                 font-size: 1.6rem;
@@ -669,7 +665,7 @@
             <!-- Más tarjetas interactivas -->
             <div class="row g-4 mt-2">
                 <div class="col-md-6">
-                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg4'); spawnHearts();" style="border-top: 4px solid var(--dorado);">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg4'); spawnHeartsLight();" style="border-top: 4px solid var(--dorado);">
                         <span class="section-icon">🎶</span>
                         <h3 class="section-title" style="font-size: 1.5rem;">Música de mi Corazón</h3>
                         <p style="color:#b0a0b8; font-size:0.9rem;">Toca aquí con amor...</p>
@@ -679,7 +675,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg5'); spawnHearts();" style="border-top: 4px solid var(--morado-claro);">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg5'); spawnHeartsLight();" style="border-top: 4px solid var(--morado-claro);">
                         <span class="section-icon">💎</span>
                         <h3 class="section-title" style="font-size: 1.5rem;">Tesoro invaluable</h3>
                         <p style="color:#b0a0b8; font-size:0.9rem;">Descubre este mensaje...</p>
@@ -712,55 +708,65 @@
     </script>
 
     <script>
-        // ============ ESTRELLAS DE FONDO ============
+        // ============ ESTRELLAS DE FONDO (REDUCIDAS Y OPTIMIZADAS) ============
         const starsContainer = document.getElementById('starsContainer');
-        const starCount = 100;
+        const starCount = 45; // Reducido de 100 a 45
+        const fragment = document.createDocumentFragment();
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
-            const size = Math.random() * 3 + 1.5;
+            const size = Math.random() * 2.5 + 1.2;
             star.style.width = size + 'px';
             star.style.height = size + 'px';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-            star.style.setProperty('--delay', (Math.random() * 5) + 's');
-            starsContainer.appendChild(star);
+            star.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
+            star.style.setProperty('--delay', (Math.random() * 6) + 's');
+            fragment.appendChild(star);
         }
+        starsContainer.appendChild(fragment);
 
-        // ============ NOTAS MUSICALES FLOTANTES ============
+        // ============ NOTAS MUSICALES FLOTANTES (OPTIMIZADAS) ============
         const floatingNotes = document.getElementById('floatingNotes');
-        const notes = ['🎵', '🎶', '♪', '♫', '🎼', '🎹', '✨', '💜', '🍷', '🌿', '🕊️', '✝️'];
+        const notes = ['🎵', '🎶', '♪', '♫', '🎼', '🎹', '✨', '💜', '🍷', '🌿', '🕊️'];
         const noteColors = [
             '#d4a0e0', '#e8c4d0', '#a0d4c0', '#c9a96e',
             '#b06ab3', '#a04050', '#1a7a54', '#e8536c',
-            '#d4a0e0', '#f0d0d8', '#c8e8d8', '#f0e4cc'
+            '#d4a0e0', '#f0d0d8', '#c8e8d8'
         ];
 
+        let maxFloatingNotes = 8; // Máximo de notas simultáneas
+
         function createFloatingNote() {
+            // Limpiar notas viejas si superamos el máximo
+            const currentNotes = floatingNotes.querySelectorAll('.floating-note');
+            if (currentNotes.length >= maxFloatingNotes) {
+                // Eliminar la más antigua (la primera)
+                if (currentNotes[0]) currentNotes[0].remove();
+            }
+
             const note = document.createElement('span');
             note.classList.add('floating-note');
             note.textContent = notes[Math.floor(Math.random() * notes.length)];
             note.style.left = Math.random() * 95 + '%';
-            note.style.setProperty('--float-duration', (Math.random() * 10 + 8) + 's');
-            note.style.setProperty('--float-delay', (Math.random() * 3) + 's');
-            note.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+            note.style.setProperty('--float-duration', (Math.random() * 8 + 7) + 's');
+            note.style.setProperty('--float-delay', (Math.random() * 2) + 's');
+            note.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
             note.style.setProperty('--note-color', noteColors[Math.floor(Math.random() * noteColors.length)]);
-            note.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
             floatingNotes.appendChild(note);
 
             // Eliminar después de la animación
-            const duration = parseFloat(note.style.getPropertyValue('--float-duration')) * 1000;
+            const duration = parseFloat(note.style.getPropertyValue('--float-duration')) * 1000 + 2000;
             setTimeout(() => {
                 if (note.parentNode) note.parentNode.removeChild(note);
-            }, duration + 2000);
+            }, duration);
         }
 
-        // Crear notas periódicamente
-        setInterval(createFloatingNote, 800);
-        // Crear algunas iniciales
-        for (let i = 0; i < 12; i++) {
-            setTimeout(createFloatingNote, i * 300);
+        // Crear notas con menor frecuencia (cada 2.5 segundos en lugar de 800ms)
+        setInterval(createFloatingNote, 2500);
+        // Crear algunas iniciales espaciadas
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingNote, i * 600);
         }
 
         // ============ MINI PIANO ============
@@ -806,11 +812,8 @@
                 this.classList.add('pressed');
                 setTimeout(() => this.classList.remove('pressed'), 150);
 
-                // Mostrar mensaje
                 const msg = loveMessagesForKey[index];
                 showToast(msg);
-
-                // Pequeño efecto visual
                 spawnMiniHearts(this);
             });
             miniPiano.appendChild(keyEl);
@@ -820,28 +823,38 @@
             const rect = element.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top;
-            for (let i = 0; i < 5; i++) {
+            const fragment = document.createDocumentFragment();
+            const emojis = ['💕', '💜', '✨', '🎵', '💖'];
+
+            for (let i = 0; i < 4; i++) {
                 const heart = document.createElement('span');
-                heart.textContent = ['💕', '💜', '✨', '🎵', '💖'][i];
+                heart.textContent = emojis[i];
                 heart.style.position = 'fixed';
-                heart.style.left = cx + (Math.random() * 40 - 20) + 'px';
+                heart.style.left = cx + (Math.random() * 30 - 15) + 'px';
                 heart.style.top = cy + 'px';
-                heart.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+                heart.style.fontSize = (Math.random() * 1 + 0.7) + 'rem';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '998';
-                heart.style.transition = 'all 1s ease-out';
+                heart.style.transition = 'all 0.8s ease-out';
                 heart.style.opacity = '1';
-                document.body.appendChild(heart);
-
-                requestAnimationFrame(() => {
-                    heart.style.transform = `translateY(-${60 + Math.random() * 80}px) translateX(${Math.random() * 60 - 30}px) scale(0.3)`;
-                    heart.style.opacity = '0';
-                });
-
-                setTimeout(() => {
-                    if (heart.parentNode) heart.parentNode.removeChild(heart);
-                }, 1100);
+                heart.style.willChange = 'transform, opacity';
+                fragment.appendChild(heart);
             }
+            document.body.appendChild(fragment);
+
+            const hearts = document.querySelectorAll('body > span[style*="pointer-events: none"]');
+            // Animar los últimos 4 añadidos
+            const recentHearts = Array.from(document.querySelectorAll('body > span')).slice(-4);
+            recentHearts.forEach(h => {
+                requestAnimationFrame(() => {
+                    h.style.transform =
+                        `translateY(-${50 + Math.random() * 60}px) translateX(${Math.random() * 50 - 25}px) scale(0.2)`;
+                    h.style.opacity = '0';
+                });
+                setTimeout(() => {
+                    if (h.parentNode) h.parentNode.removeChild(h);
+                }, 900);
+            });
         }
 
         // ============ TOAST ============
@@ -862,62 +875,71 @@
             const msg = document.getElementById(msgId);
             const allMessages = card.querySelectorAll('.hidden-message');
 
-            // Si ya está visible, lo oculta (toggle)
             if (msg.classList.contains('show')) {
                 msg.classList.remove('show');
                 return;
             }
 
-            // Oculta otros mensajes en la misma tarjeta
             allMessages.forEach(m => m.classList.remove('show'));
-
-            // Muestra el mensaje
             msg.classList.add('show');
 
-            // Efecto en la tarjeta
-            card.style.transform = 'scale(1.03)';
+            card.style.transform = 'scale(1.02)';
             setTimeout(() => {
                 card.style.transform = '';
             }, 200);
 
-            // Mostrar toast también
-            const preview = msg.textContent.trim().substring(0, 50) + '...';
+            const preview = msg.textContent.trim().substring(0, 45) + '...';
             showToast('💌 ' + preview);
         }
 
-        // ============ CORAZONES DE CONFETI ============
-        function spawnHearts() {
-            const heartEmojis = ['💖', '💕', '💜', '🍷', '✨', '🎵', '💗', '🕊️', '🌿', '💝', '🎹', '🙏'];
-            for (let i = 0; i < 18; i++) {
+        // ============ CORAZONES DE CONFETI (VERSIÓN LIGERA) ============
+        function spawnHeartsLight() {
+            const heartEmojis = ['💖', '💕', '💜', '🍷', '✨', '🎵', '💗', '🕊️', '🌿', '💝'];
+            const fragment = document.createDocumentFragment();
+            const count = 10;
+
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement('span');
                 heart.classList.add('confetti-heart');
                 heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
                 heart.style.left = Math.random() * 90 + '%';
-                heart.style.top = -(Math.random() * 40 + 10) + 'px';
-                heart.style.setProperty('--fall-duration', (Math.random() * 2.5 + 2) + 's');
-                heart.style.setProperty('--heart-size', (Math.random() * 2 + 1.2) + 'rem');
-                heart.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
-                heart.style.animationDelay = (Math.random() * 0.8) + 's';
-                document.body.appendChild(heart);
-
-                const duration = parseFloat(heart.style.getPropertyValue('--fall-duration')) * 1000 + 800;
-                setTimeout(() => {
-                    if (heart.parentNode) heart.parentNode.removeChild(heart);
-                }, duration);
+                heart.style.top = -(Math.random() * 30 + 5) + 'px';
+                heart.style.setProperty('--fall-duration', (Math.random() * 2 + 1.8) + 's');
+                heart.style.setProperty('--heart-size', (Math.random() * 1.8 + 1) + 'rem');
+                heart.style.setProperty('--spin', (Math.random() * 500 - 250) + 'deg');
+                fragment.appendChild(heart);
             }
+            document.body.appendChild(fragment);
+
+            // Limpiar después
+            setTimeout(() => {
+                document.querySelectorAll('.confetti-heart').forEach(h => {
+                    const dur = parseFloat(h.style.getPropertyValue('--fall-duration')) * 1000;
+                    const startTime = parseFloat(h.dataset.startTime || '0');
+                    if (Date.now() - startTime > dur + 500) h.remove();
+                });
+            }, 3000);
+
+            // Marcar tiempo de inicio
+            document.querySelectorAll('.confetti-heart').forEach(h => {
+                if (!h.dataset.startTime) h.dataset.startTime = Date.now();
+            });
+        }
+
+        function spawnHearts() {
+            spawnHeartsLight(); // Usamos la versión ligera
         }
 
         // ============ CORAZÓN CENTRAL ============
         const heartBeat = document.getElementById('heartBeat');
         heartBeat.addEventListener('click', function() {
-            spawnHearts();
+            spawnHeartsLight();
             showToast('💖 ¡Meriyeins, eres amada más allá de las palabras! 💖');
-            // Efecto burst
             this.style.animation = 'none';
             this.offsetHeight;
             this.style.animation = 'heartBurst 0.5s ease-out';
             setTimeout(() => {
-                this.style.animation = 'heartBeat 1s ease-in-out infinite';
+                this.style.animation = 'heartBeat 1.2s ease-in-out infinite';
             }, 500);
         });
 
@@ -931,9 +953,9 @@
                 ref: '1 Corintios 13:4,7' },
             { text: '"Canten al Señor un cántico nuevo, porque ha hecho maravillas."', ref: 'Salmos 98:1' },
             { text: '"Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida."',
-            ref: 'Proverbios 4:23' },
+                ref: 'Proverbios 4:23' },
             { text: '"Regocíjate en el Señor, y él te concederá las peticiones de tu corazón."',
-            ref: 'Salmos 37:4' },
+                ref: 'Salmos 37:4' },
         ];
         let currentVerseIndex = 0;
 
@@ -943,7 +965,6 @@
             const verseTextEl = document.querySelector('.verse-text');
             const verseRefEl = document.querySelector('.verse-ref');
 
-            // Animación de cambio
             verseTextEl.style.opacity = '0';
             verseRefEl.style.opacity = '0';
             verseTextEl.style.transition = 'opacity 0.3s ease';
@@ -954,84 +975,85 @@
                 verseRefEl.textContent = '— ' + verse.ref;
                 verseTextEl.style.opacity = '1';
                 verseRefEl.style.opacity = '1';
-            }, 350);
+            }, 300);
 
             showToast('📖 ' + verse.ref);
         }
 
-        // ============ GRAN SORPRESA ============
+        // ============ GRAN SORPRESA (OPTIMIZADA) ============
         function bigSurprise() {
             const btn = document.getElementById('surpriseBtn');
             btn.style.transform = 'scale(1.1)';
             setTimeout(() => btn.style.transform = '', 200);
 
-            // Lluvia masiva de corazones
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('span');
-                    heart.classList.add('confetti-heart');
-                    const emojis = ['💖', '💕', '💜', '🎹', '✨', '🕊️', '💝', '🎵', '🙏', '💗', '🍷', '🌿'];
-                    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                    heart.style.left = Math.random() * 90 + '%';
-                    heart.style.top = -(Math.random() * 50 + 10) + 'px';
-                    heart.style.setProperty('--fall-duration', (Math.random() * 3 + 2.5) + 's');
-                    heart.style.setProperty('--heart-size', (Math.random() * 2.5 + 1.5) + 'rem');
-                    heart.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
-                    document.body.appendChild(heart);
-                    const duration = parseFloat(heart.style.getPropertyValue('--fall-duration')) * 1000 + 800;
-                    setTimeout(() => {
-                        if (heart.parentNode) heart.parentNode.removeChild(heart);
-                    }, duration);
-                }, i * 60);
-            }
+            // Lluvia de corazones controlada
+            const heartEmojis = ['💖', '💕', '💜', '🎹', '✨', '🕊️', '💝', '🎵', '🙏', '💗', '🍷', '🌿'];
+            const fragment = document.createDocumentFragment();
+            const count = 20;
 
-            // Mensaje especial
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('span');
+                heart.classList.add('confetti-heart');
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 90 + '%';
+                heart.style.top = -(Math.random() * 40 + 10) + 'px';
+                heart.style.setProperty('--fall-duration', (Math.random() * 2.5 + 2) + 's');
+                heart.style.setProperty('--heart-size', (Math.random() * 2 + 1.2) + 'rem');
+                heart.style.setProperty('--spin', (Math.random() * 600 - 300) + 'deg');
+                heart.style.animationDelay = (Math.random() * 0.6) + 's';
+                fragment.appendChild(heart);
+            }
+            document.body.appendChild(fragment);
+
+            // Limpiar corazones después de su animación
+            setTimeout(() => {
+                document.querySelectorAll('.confetti-heart').forEach(h => h.remove());
+            }, 4000);
+
             const specialMessages = [
-                '💜 Meriyeins Fernández, eres la bendición más hermosa que Dios pudo poner en este mundo 💜',
-                '🎹 Que cada tecla que toques sea un recordatorio de lo increíble que eres 🎹',
-                '🍷 Tu esencia es como el mejor vino: profunda, dulce e inolvidable 🍷',
-                '🌿 Creces como la naturaleza más bella, firme en tu fe y en tu amor 🌿',
-                '✨ Eres amada, eres valiosa, eres única. Nunca lo olvides ✨',
+                '💜 Meriyeins Fernández, eres la bendición más hermosa 💜',
+                '🎹 Que cada tecla sea un recordatorio de tu valor 🎹',
+                '🍷 Tu esencia es profunda, dulce e inolvidable 🍷',
+                '🌿 Firme en tu fe y en tu amor 🌿',
+                '✨ Eres amada, valiosa y única ✨',
             ];
 
-            // Mostrar varios toasts seguidos
             specialMessages.forEach((msg, i) => {
-                setTimeout(() => showToast(msg), i * 2800);
+                setTimeout(() => showToast(msg), i * 2600);
             });
 
-            // También revelar todos los mensajes ocultos
             setTimeout(() => {
                 document.querySelectorAll('.hidden-message').forEach(msg => {
                     msg.classList.add('show');
                 });
                 document.querySelectorAll('.section-card.clickable').forEach(card => {
-                    card.style.transform = 'scale(1.04)';
-                    card.style.borderColor = 'rgba(201,169,110,0.7)';
-                    card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.5), 0 0 50px rgba(201,169,110,0.25)';
+                    card.style.transform = 'scale(1.03)';
+                    card.style.borderColor = 'rgba(201,169,110,0.6)';
+                    card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.4), 0 0 30px rgba(201,169,110,0.2)';
                     setTimeout(() => {
                         card.style.transform = '';
                         card.style.borderColor = '';
                         card.style.boxShadow = '';
-                    }, 1500);
+                    }, 1200);
                 });
-            }, 2000);
+            }, 1800);
         }
 
         // ============ MENSAJE AL CARGAR ============
         window.addEventListener('load', () => {
             setTimeout(() => {
                 showToast('💜 Bienvenida, Meriyeins Fernández 💜');
-            }, 800);
+            }, 700);
             setTimeout(() => {
                 showToast('🎹 Esta página es para ti, con todo mi amor 🎹');
-            }, 3500);
+            }, 3000);
         });
 
-        // ============ DOBLE CLIC EN CUALQUIER LUGAR ============
+        // ============ DOBLE CLIC EN CUALQUIER LUGAR (optimizado) ============
         document.addEventListener('dblclick', function(e) {
             if (e.target.closest('button') || e.target.closest('.piano-key') || e.target.closest('.clickable'))
                 return;
-            spawnHearts();
+            spawnHeartsLight();
             const randomMessages = [
                 '💕 ¡Eres increíble, Meriyeins! 💕',
                 '🎵 La música vive en ti 🎵',
