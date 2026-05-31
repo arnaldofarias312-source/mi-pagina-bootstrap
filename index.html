@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💜 Para Meriyeins Fernández 💜</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --morado: #7B2D8E;
+            --morado-claro: #B06AB3;
+            --morado-oscuro: #4A1A5E;
+            --vinotinto: #6B1D2F;
+            --vinotinto-claro: #A04050;
+            --verde-botella: #0B4F37;
+            --verde-botella-claro: #1A7A54;
+            --crema: #FDF8F0;
+            --dorado: #C9A96E;
+            --rosa-suave: #F2D5E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #1a0a1e 0%, #1a0f1a 15%, #0d1117 30%, #0a0f0d 50%, #1a0a1e 70%, #0d0a0f 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #e0d8e8;
+            position: relative;
+        }
+
+        /* Estrellas de fondo */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+        @keyframes twinkle {
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.8);
+                box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Notas musicales flotantes */
+        .floating-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .floating-note {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp var(--float-duration) linear infinite;
+            animation-delay: var(--float-delay);
+            opacity: 0;
+            color: var(--note-color);
+            text-shadow: 0 0 12px var(--note-color);
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(var(--drift)) rotate(360deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header / Hero */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .hero-content {
+            background: rgba(26, 10, 30, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            border: 2px solid rgba(176, 106, 179, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(123, 45, 142, 0.2),
+                inset 0 0 40px rgba(176, 106, 179, 0.05);
+            max-width: 700px;
+            width: 100%;
+            animation: fadeInUp 1.2s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg,
+                    transparent,
+                    rgba(176, 106, 179, 0.08),
+                    transparent,
+                    rgba(11, 79, 55, 0.08),
+                    transparent,
+                    rgba(160, 64, 80, 0.08),
+                    transparent);
+            animation: rotateBorder 12s linear infinite;
+        }
+        @keyframes rotateBorder {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4a0e0, #e8c4d0, #a0d4c0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #c9a96e;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+        .heart-beat {
+            display: inline-block;
+            animation: heartBeat 1s ease-in-out infinite;
+            font-size: 3rem;
+            color: #e8536c;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 0 30px rgba(232, 83, 108, 0.7);
+        }
+        .heart-beat:hover {
+            transform: scale(1.3);
+        }
+        @keyframes heartBeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.35);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.25);
+            }
+            60% {
+                transform: scale(1);
+            }
+        }
+        .heart-beat:active {
+            animation: heartBurst 0.5s ease-out;
+        }
+        @keyframes heartBurst {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(2.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Piano decorativo */
+        .piano-mini {
+            display: flex;
+            justify-content: center;
+            gap: 3px;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .piano-key {
+            width: 38px;
+            height: 80px;
+            border-radius: 0 0 8px 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            position: relative;
+            border: 2px solid #3a2a3f;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 6px;
+            color: transparent;
+            font-weight: 700;
+            user-select: none;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .piano-key.white {
+            background: linear-gradient(180deg, #f5f0f5 0%, #d8d0da 40%, #c0b8c2 100%);
+            width: 44px;
+            height: 90px;
+            z-index: 1;
+            color: #4a3a4f;
+        }
+        .piano-key.black {
+            background: linear-gradient(180deg, #2a1a2f 0%, #1a0a1e 50%, #0d0510 100%);
+            width: 28px;
+            height: 56px;
+            z-index: 2;
+            margin-left: -12px;
+            margin-right: -12px;
+            color: #c0b0c8;
+            border-color: #1a0a1e;
+        }
+        .piano-key:active,
+        .piano-key.pressed {
+            transform: translateY(6px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+            transition: all 0.05s ease;
+        }
+        .piano-key.white:active,
+        .piano-key.white.pressed {
+            background: linear-gradient(180deg, #e8d8f0 0%, #c8b8cf 100%);
+        }
+        .piano-key.black:active,
+        .piano-key.black.pressed {
+            background: linear-gradient(180deg, #3a1a3f 0%, #1a0a1e 100%);
+        }
+
+        /* Secciones */
+        .section-card {
+            background: rgba(26, 10, 30, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            border: 1.5px solid rgba(176, 106, 179, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+        .section-card:hover {
+            border-color: rgba(176, 106, 179, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(123, 45, 142, 0.15);
+            transform: translateY(-3px);
+        }
+        .section-card.clickable {
+            cursor: pointer;
+        }
+        .section-card.clickable:active {
+            transform: scale(0.97);
+            transition: transform 0.15s ease;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #d4a0e0;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-align: center;
+        }
+
+        /* Mensajes ocultos */
+        .hidden-message {
+            display: none;
+            animation: revealMessage 0.6s ease-out;
+            padding: 1.2rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
+        }
+        .hidden-message.show {
+            display: block;
+        }
+        @keyframes revealMessage {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .msg-morado {
+            background: rgba(123, 45, 142, 0.2);
+            border: 1px solid rgba(176, 106, 179, 0.4);
+            color: #e8d0f0;
+        }
+        .msg-vinotinto {
+            background: rgba(107, 29, 47, 0.2);
+            border: 1px solid rgba(160, 64, 80, 0.4);
+            color: #f0d0d8;
+        }
+        .msg-verde {
+            background: rgba(11, 79, 55, 0.2);
+            border: 1px solid rgba(26, 122, 84, 0.4);
+            color: #c8e8d8;
+        }
+        .msg-dorado {
+            background: rgba(201, 169, 110, 0.12);
+            border: 1px solid rgba(201, 169, 110, 0.35);
+            color: #f0e4cc;
+        }
+
+        /* Botones */
+        .btn-custom {
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.35s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn-morado {
+            background: var(--morado);
+            color: white;
+            border-color: var(--morado-claro);
+        }
+        .btn-morado:hover {
+            background: var(--morado-oscuro);
+            border-color: var(--morado-claro);
+            box-shadow: 0 8px 25px rgba(123, 45, 142, 0.5);
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-vinotinto {
+            background: var(--vinotinto);
+            color: white;
+            border-color: var(--vinotinto-claro);
+        }
+        .btn-vinotinto:hover {
+            background: #4d1522;
+            border-color: var(--vinotinto-claro);
+            box-shadow: 0 8px 25px rgba(107, 29, 47, 0.5);
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-verde {
+            background: var(--verde-botella);
+            color: white;
+            border-color: var(--verde-botella-claro);
+        }
+        .btn-verde:hover {
+            background: #073a27;
+            border-color: var(--verde-botella-claro);
+            box-shadow: 0 8px 25px rgba(11, 79, 55, 0.5);
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-outline-dorado {
+            background: transparent;
+            color: var(--dorado);
+            border-color: var(--dorado);
+        }
+        .btn-outline-dorado:hover {
+            background: rgba(201, 169, 110, 0.15);
+            border-color: var(--dorado);
+            color: #f0e4cc;
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Toast / notificación flotante */
+        .love-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            background: rgba(26, 10, 30, 0.9);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(176, 106, 179, 0.6);
+            border-radius: 50px;
+            padding: 0.9rem 2rem;
+            z-index: 1000;
+            color: #e8d0f0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(123, 45, 142, 0.3);
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .love-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Confeti de corazones */
+        .confetti-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: confettiFall var(--fall-duration) ease-in forwards;
+            font-size: var(--heart-size);
+            opacity: 0.9;
+        }
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            70% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(105vh) rotate(var(--spin)) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Versículo */
+        .verse-card {
+            background: rgba(201, 169, 110, 0.08);
+            border: 1.5px solid rgba(201, 169, 110, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+        }
+        .verse-card::before {
+            content: '✝';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background: #1a0a1e;
+            padding: 0 15px;
+            color: var(--dorado);
+        }
+        .verse-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #f0e4cc;
+            line-height: 1.8;
+        }
+        .verse-ref {
+            color: var(--dorado);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(224, 216, 232, 0.5);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .hero-content {
+                padding: 2rem 1.2rem;
+                border-radius: 22px;
+            }
+            .piano-key.white {
+                width: 30px;
+                height: 65px;
+                font-size: 0.45rem;
+            }
+            .piano-key.black {
+                width: 20px;
+                height: 40px;
+                margin-left: -9px;
+                margin-right: -9px;
+                font-size: 0.4rem;
+            }
+            .section-card {
+                padding: 1.5rem 1rem;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .love-toast {
+                font-size: 0.8rem;
+                padding: 0.7rem 1.4rem;
+                border-radius: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Estrellas -->
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Notas musicales flotantes -->
+    <div class="floating-notes" id="floatingNotes"></div>
+
+    <!-- Toast de amor -->
+    <div class="love-toast" id="loveToast"></div>
+
+    <!-- Contenido principal -->
+    <div class="main-wrapper">
+        <div class="container py-4">
+
+            <!-- HERO SECTION -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-inner">
+                        <div class="mb-3">
+                            <span style="font-size: 2.5rem;">🎹</span>
+                        </div>
+                        <h1 class="hero-title">Meriyeins Fernández</h1>
+                        <p class="hero-subtitle">Eres melodía en mi corazón</p>
+                        <div class="my-3">
+                            <span class="heart-beat" id="heartBeat" title="¡Haz clic! 💕">💖</span>
+                        </div>
+                        <p style="color: #c0a8d0; font-size: 1.05rem; margin-top: 0.5rem;">
+                            Cada nota que tocas en el piano resuena en mi alma ✨
+                        </p>
+                        <div class="piano-mini mt-3" id="miniPiano">
+                            <!-- Se genera con JS -->
+                        </div>
+                        <p class="mt-2" style="font-size: 0.8rem; color: #908098;">🎵 ¡Toca las teclas! 🎵</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Mensajes interactivos -->
+            <div class="row g-4">
+                <!-- Tarjeta 1 - Morado -->
+                <div class="col-md-4">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg1')" style="border-left: 4px solid var(--morado-claro);">
+                        <span class="section-icon">💜</span>
+                        <h3 class="section-title" style="font-size: 1.5rem;">Eres Luz</h3>
+                        <p style="color:#b0a0b8; font-size:0.9rem;">Haz clic para descubrir...</p>
+                        <div class="hidden-message msg-morado" id="msg1">
+                            ✨ Eres la luz que ilumina mis días más oscuros. Tu sonrisa tiene el poder de cambiar todo a tu alrededor. <strong>Meriyeins</strong>, cada momento contigo es un regalo que atesoro profundamente. 💜
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2 - Vinotinto -->
+                <div class="col-md-4">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg2')" style="border-left: 4px solid var(--vinotinto-claro);">
+                        <span class="section-icon">🍷</span>
+                        <h3 class="section-title" style="font-size: 1.5rem;">Tu Pasión</h3>
+                        <p style="color:#b0a0b8; font-size:0.9rem;">Haz clic para descubrir...</p>
+                        <div class="hidden-message msg-vinotinto" id="msg2">
+                            🎹 La pasión con la que tocas el piano refleja la belleza de tu alma. Cada acorde que interpretas es un eco del amor que llevas dentro. Eres una artista en todo lo que haces, <strong>Meriyeins</strong>. 🍷
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3 - Verde botella -->
+                <div class="col-md-4">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg3')" style="border-left: 4px solid var(--verde-botella-claro);">
+                        <span class="section-icon">🌿</span>
+                        <h3 class="section-title" style="font-size: 1.5rem;">Tu Fe</h3>
+                        <p style="color:#b0a0b8; font-size:0.9rem;">Haz clic para descubrir...</p>
+                        <div class="hidden-message msg-verde" id="msg3">
+                            🙏 Tu fe en Dios es inspiradora. Ver cómo confías en Él y cómo vives tu cristianismo con tanta autenticidad me llena de admiración. <strong>Meriyeins</strong>, eres una mujer de fe inquebrantable. 🌿
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Versículo bíblico -->
+            <div class="verse-card my-4">
+                <p class="verse-text">
+                    "El Señor tu Dios está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría, callará de amor, se regocijará sobre ti con cánticos."
+                </p>
+                <p class="verse-ref">— Sofonías 3:17</p>
+                <button class="btn btn-outline-dorado btn-sm mt-3" onclick="changeVerse()">
+                    <i class="fas fa-sync-alt me-1"></i> Otro versículo
+                </button>
+            </div>
+
+            <!-- Más tarjetas interactivas -->
+            <div class="row g-4 mt-2">
+                <div class="col-md-6">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg4'); spawnHearts();" style="border-top: 4px solid var(--dorado);">
+                        <span class="section-icon">🎶</span>
+                        <h3 class="section-title" style="font-size: 1.5rem;">Música de mi Corazón</h3>
+                        <p style="color:#b0a0b8; font-size:0.9rem;">Toca aquí con amor...</p>
+                        <div class="hidden-message msg-dorado" id="msg4">
+                            🎼 Dicen que la música es el lenguaje del alma. Y tú, <strong>Meriyeins</strong>, hablas ese idioma con una fluidez que enamora. Cada nota del piano bajo tus dedos es un poema, cada melodía una declaración de amor a la vida. Gracias por llenar el mundo de armonía. 🎵💛
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="section-card clickable text-center" onclick="revealMessage(this, 'msg5'); spawnHearts();" style="border-top: 4px solid var(--morado-claro);">
+                        <span class="section-icon">💎</span>
+                        <h3 class="section-title" style="font-size: 1.5rem;">Tesoro invaluable</h3>
+                        <p style="color:#b0a0b8; font-size:0.9rem;">Descubre este mensaje...</p>
+                        <div class="hidden-message msg-morado" id="msg5">
+                            💎 Hay personas que llegan a tu vida y la transforman por completo. Tú, <strong>Meriyeins Fernández</strong>, eres una de ellas. Eres un tesoro invaluable, una joya rara que brilla con luz propia. No hay día en que no agradezca por tu existencia. Eres amada, eres valiosa, eres única. 💜✨
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón sorpresa -->
+            <div class="text-center my-5">
+                <button class="btn btn-morado btn-lg px-5 py-3" onclick="bigSurprise()" id="surpriseBtn">
+                    <i class="fas fa-gift me-2"></i> ¡Toca aquí para una sorpresa!
+                </button>
+                <p style="font-size:0.8rem; color:#706878; margin-top:0.5rem;">Algo especial te espera...</p>
+            </div>
+
+            <!-- Footer -->
+            <p class="footer-text">
+                ✨ Hecho con todo el amor del mundo para <strong>Meriyeins Fernández</strong> ✨<br>
+                💜 Tú que tocas el piano, amas la música y caminas con Dios 💜
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script>
+        // ============ ESTRELLAS DE FONDO ============
+        const starsContainer = document.getElementById('starsContainer');
+        const starCount = 100;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            star.style.setProperty('--delay', (Math.random() * 5) + 's');
+            starsContainer.appendChild(star);
+        }
+
+        // ============ NOTAS MUSICALES FLOTANTES ============
+        const floatingNotes = document.getElementById('floatingNotes');
+        const notes = ['🎵', '🎶', '♪', '♫', '🎼', '🎹', '✨', '💜', '🍷', '🌿', '🕊️', '✝️'];
+        const noteColors = [
+            '#d4a0e0', '#e8c4d0', '#a0d4c0', '#c9a96e',
+            '#b06ab3', '#a04050', '#1a7a54', '#e8536c',
+            '#d4a0e0', '#f0d0d8', '#c8e8d8', '#f0e4cc'
+        ];
+
+        function createFloatingNote() {
+            const note = document.createElement('span');
+            note.classList.add('floating-note');
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.left = Math.random() * 95 + '%';
+            note.style.setProperty('--float-duration', (Math.random() * 10 + 8) + 's');
+            note.style.setProperty('--float-delay', (Math.random() * 3) + 's');
+            note.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+            note.style.setProperty('--note-color', noteColors[Math.floor(Math.random() * noteColors.length)]);
+            note.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            floatingNotes.appendChild(note);
+
+            // Eliminar después de la animación
+            const duration = parseFloat(note.style.getPropertyValue('--float-duration')) * 1000;
+            setTimeout(() => {
+                if (note.parentNode) note.parentNode.removeChild(note);
+            }, duration + 2000);
+        }
+
+        // Crear notas periódicamente
+        setInterval(createFloatingNote, 800);
+        // Crear algunas iniciales
+        for (let i = 0; i < 12; i++) {
+            setTimeout(createFloatingNote, i * 300);
+        }
+
+        // ============ MINI PIANO ============
+        const miniPiano = document.getElementById('miniPiano');
+        const pianoKeys = [
+            { note: 'Do', type: 'white', label: 'C' },
+            { note: 'Do#', type: 'black', label: 'C#' },
+            { note: 'Re', type: 'white', label: 'D' },
+            { note: 'Re#', type: 'black', label: 'D#' },
+            { note: 'Mi', type: 'white', label: 'E' },
+            { note: 'Fa', type: 'white', label: 'F' },
+            { note: 'Fa#', type: 'black', label: 'F#' },
+            { note: 'Sol', type: 'white', label: 'G' },
+            { note: 'Sol#', type: 'black', label: 'G#' },
+            { note: 'La', type: 'white', label: 'A' },
+            { note: 'La#', type: 'black', label: 'A#' },
+            { note: 'Si', type: 'white', label: 'B' },
+        ];
+
+        const loveMessagesForKey = [
+            '¡Eres mi melodía favorita! 💜',
+            'Cada nota me recuerda a ti 🎶',
+            'Tu amor es la mejor canción 🎵',
+            'El piano suena más dulce cuando pienso en ti ✨',
+            'Eres la armonía perfecta en mi vida 💕',
+            'Tus dedos crean magia en el teclado 🎹',
+            'Meriyeins, eres música para mi alma 🍷',
+            'Dios te dio un don maravilloso 🙏',
+            'Cada acorde es una oración de amor 🌿',
+            'Tu talento es un regalo divino ✝️',
+            'La música y tú son uno solo 💎',
+            'Eres la sinfonía más hermosa 🎼',
+        ];
+
+        pianoKeys.forEach((key, index) => {
+            const keyEl = document.createElement('div');
+            keyEl.classList.add('piano-key', key.type);
+            keyEl.textContent = key.label;
+            keyEl.setAttribute('data-note', key.note);
+            keyEl.setAttribute('data-index', index);
+            keyEl.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.add('pressed');
+                setTimeout(() => this.classList.remove('pressed'), 150);
+
+                // Mostrar mensaje
+                const msg = loveMessagesForKey[index];
+                showToast(msg);
+
+                // Pequeño efecto visual
+                spawnMiniHearts(this);
+            });
+            miniPiano.appendChild(keyEl);
+        });
+
+        function spawnMiniHearts(element) {
+            const rect = element.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top;
+            for (let i = 0; i < 5; i++) {
+                const heart = document.createElement('span');
+                heart.textContent = ['💕', '💜', '✨', '🎵', '💖'][i];
+                heart.style.position = 'fixed';
+                heart.style.left = cx + (Math.random() * 40 - 20) + 'px';
+                heart.style.top = cy + 'px';
+                heart.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '998';
+                heart.style.transition = 'all 1s ease-out';
+                heart.style.opacity = '1';
+                document.body.appendChild(heart);
+
+                requestAnimationFrame(() => {
+                    heart.style.transform = `translateY(-${60 + Math.random() * 80}px) translateX(${Math.random() * 60 - 30}px) scale(0.3)`;
+                    heart.style.opacity = '0';
+                });
+
+                setTimeout(() => {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, 1100);
+            }
+        }
+
+        // ============ TOAST ============
+        const loveToast = document.getElementById('loveToast');
+        let toastTimeout;
+
+        function showToast(message) {
+            clearTimeout(toastTimeout);
+            loveToast.textContent = message;
+            loveToast.classList.add('show');
+            toastTimeout = setTimeout(() => {
+                loveToast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ============ REVELAR MENSAJES EN TARJETAS ============
+        function revealMessage(card, msgId) {
+            const msg = document.getElementById(msgId);
+            const allMessages = card.querySelectorAll('.hidden-message');
+
+            // Si ya está visible, lo oculta (toggle)
+            if (msg.classList.contains('show')) {
+                msg.classList.remove('show');
+                return;
+            }
+
+            // Oculta otros mensajes en la misma tarjeta
+            allMessages.forEach(m => m.classList.remove('show'));
+
+            // Muestra el mensaje
+            msg.classList.add('show');
+
+            // Efecto en la tarjeta
+            card.style.transform = 'scale(1.03)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 200);
+
+            // Mostrar toast también
+            const preview = msg.textContent.trim().substring(0, 50) + '...';
+            showToast('💌 ' + preview);
+        }
+
+        // ============ CORAZONES DE CONFETI ============
+        function spawnHearts() {
+            const heartEmojis = ['💖', '💕', '💜', '🍷', '✨', '🎵', '💗', '🕊️', '🌿', '💝', '🎹', '🙏'];
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('span');
+                heart.classList.add('confetti-heart');
+                heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 90 + '%';
+                heart.style.top = -(Math.random() * 40 + 10) + 'px';
+                heart.style.setProperty('--fall-duration', (Math.random() * 2.5 + 2) + 's');
+                heart.style.setProperty('--heart-size', (Math.random() * 2 + 1.2) + 'rem');
+                heart.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+                heart.style.animationDelay = (Math.random() * 0.8) + 's';
+                document.body.appendChild(heart);
+
+                const duration = parseFloat(heart.style.getPropertyValue('--fall-duration')) * 1000 + 800;
+                setTimeout(() => {
+                    if (heart.parentNode) heart.parentNode.removeChild(heart);
+                }, duration);
+            }
+        }
+
+        // ============ CORAZÓN CENTRAL ============
+        const heartBeat = document.getElementById('heartBeat');
+        heartBeat.addEventListener('click', function() {
+            spawnHearts();
+            showToast('💖 ¡Meriyeins, eres amada más allá de las palabras! 💖');
+            // Efecto burst
+            this.style.animation = 'none';
+            this.offsetHeight;
+            this.style.animation = 'heartBurst 0.5s ease-out';
+            setTimeout(() => {
+                this.style.animation = 'heartBeat 1s ease-in-out infinite';
+            }, 500);
+        });
+
+        // ============ VERSÍCULOS ============
+        const verses = [
+            { text: '"El Señor tu Dios está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría, callará de amor, se regocijará sobre ti con cánticos."',
+                ref: 'Sofonías 3:17' },
+            { text: '"Porque yo sé los pensamientos que tengo acerca de vosotros, dice el Señor, pensamientos de paz, y no de mal, para daros el fin que esperáis."',
+                ref: 'Jeremías 29:11' },
+            { text: '"El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso. Todo lo sufre, todo lo cree, todo lo espera, todo lo soporta."',
+                ref: '1 Corintios 13:4,7' },
+            { text: '"Canten al Señor un cántico nuevo, porque ha hecho maravillas."', ref: 'Salmos 98:1' },
+            { text: '"Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida."',
+            ref: 'Proverbios 4:23' },
+            { text: '"Regocíjate en el Señor, y él te concederá las peticiones de tu corazón."',
+            ref: 'Salmos 37:4' },
+        ];
+        let currentVerseIndex = 0;
+
+        function changeVerse() {
+            currentVerseIndex = (currentVerseIndex + 1) % verses.length;
+            const verse = verses[currentVerseIndex];
+            const verseTextEl = document.querySelector('.verse-text');
+            const verseRefEl = document.querySelector('.verse-ref');
+
+            // Animación de cambio
+            verseTextEl.style.opacity = '0';
+            verseRefEl.style.opacity = '0';
+            verseTextEl.style.transition = 'opacity 0.3s ease';
+            verseRefEl.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                verseTextEl.textContent = verse.text;
+                verseRefEl.textContent = '— ' + verse.ref;
+                verseTextEl.style.opacity = '1';
+                verseRefEl.style.opacity = '1';
+            }, 350);
+
+            showToast('📖 ' + verse.ref);
+        }
+
+        // ============ GRAN SORPRESA ============
+        function bigSurprise() {
+            const btn = document.getElementById('surpriseBtn');
+            btn.style.transform = 'scale(1.1)';
+            setTimeout(() => btn.style.transform = '', 200);
+
+            // Lluvia masiva de corazones
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('span');
+                    heart.classList.add('confetti-heart');
+                    const emojis = ['💖', '💕', '💜', '🎹', '✨', '🕊️', '💝', '🎵', '🙏', '💗', '🍷', '🌿'];
+                    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    heart.style.left = Math.random() * 90 + '%';
+                    heart.style.top = -(Math.random() * 50 + 10) + 'px';
+                    heart.style.setProperty('--fall-duration', (Math.random() * 3 + 2.5) + 's');
+                    heart.style.setProperty('--heart-size', (Math.random() * 2.5 + 1.5) + 'rem');
+                    heart.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+                    document.body.appendChild(heart);
+                    const duration = parseFloat(heart.style.getPropertyValue('--fall-duration')) * 1000 + 800;
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.parentNode.removeChild(heart);
+                    }, duration);
+                }, i * 60);
+            }
+
+            // Mensaje especial
+            const specialMessages = [
+                '💜 Meriyeins Fernández, eres la bendición más hermosa que Dios pudo poner en este mundo 💜',
+                '🎹 Que cada tecla que toques sea un recordatorio de lo increíble que eres 🎹',
+                '🍷 Tu esencia es como el mejor vino: profunda, dulce e inolvidable 🍷',
+                '🌿 Creces como la naturaleza más bella, firme en tu fe y en tu amor 🌿',
+                '✨ Eres amada, eres valiosa, eres única. Nunca lo olvides ✨',
+            ];
+
+            // Mostrar varios toasts seguidos
+            specialMessages.forEach((msg, i) => {
+                setTimeout(() => showToast(msg), i * 2800);
+            });
+
+            // También revelar todos los mensajes ocultos
+            setTimeout(() => {
+                document.querySelectorAll('.hidden-message').forEach(msg => {
+                    msg.classList.add('show');
+                });
+                document.querySelectorAll('.section-card.clickable').forEach(card => {
+                    card.style.transform = 'scale(1.04)';
+                    card.style.borderColor = 'rgba(201,169,110,0.7)';
+                    card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.5), 0 0 50px rgba(201,169,110,0.25)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                        card.style.borderColor = '';
+                        card.style.boxShadow = '';
+                    }, 1500);
+                });
+            }, 2000);
+        }
+
+        // ============ MENSAJE AL CARGAR ============
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                showToast('💜 Bienvenida, Meriyeins Fernández 💜');
+            }, 800);
+            setTimeout(() => {
+                showToast('🎹 Esta página es para ti, con todo mi amor 🎹');
+            }, 3500);
+        });
+
+        // ============ DOBLE CLIC EN CUALQUIER LUGAR ============
+        document.addEventListener('dblclick', function(e) {
+            if (e.target.closest('button') || e.target.closest('.piano-key') || e.target.closest('.clickable'))
+                return;
+            spawnHearts();
+            const randomMessages = [
+                '💕 ¡Eres increíble, Meriyeins! 💕',
+                '🎵 La música vive en ti 🎵',
+                '🙏 Dios te ama y yo también 🙏',
+                '✨ Brillas con luz propia ✨',
+                '🍷 Eres profunda y hermosa 🍷',
+                '🌿 Tu fe mueve montañas 🌿',
+                '💜 Eres un sueño hecho realidad 💜',
+            ];
+            showToast(randomMessages[Math.floor(Math.random() * randomMessages.length)]);
+        });
+
+        console.log('💜✨ Página dedicada a Meriyeins Fernández ✨💜');
+        console.log('🎹 Que la música, la fe y el amor te acompañen siempre 🎹');
+        console.log('🍷 Con todo mi cariño 🍷');
+    </script>
+</body>
+</html>
